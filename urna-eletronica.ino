@@ -24,10 +24,28 @@ void setup() {
   Serial.begin(9600);
   Serial.println("wp"); // waiting participants
 
+  lcd.print("Aguardando");
+  lcd.setCursor(0, 1);
+  lcd.print("participantes...");
+
   while(Serial.available() == 0) {delay(100);}
 
   String participantsData = Serial.readString();
   addParticipants(participantsData);
+
+  Serial.println("pa"); // participants added
+  lcd.clear();
+  lcd.print("Participantes");
+  lcd.setCursor(0, 1);
+  lcd.print("adicionados.");
+
+  tone(buzzerPin, 800);
+  delay(150);
+  tone(buzzerPin, 1000);
+  delay(150);
+  tone(buzzerPin, 1200);
+  delay(150);
+  noTone(buzzerPin);
 }
 
 void loop() {
