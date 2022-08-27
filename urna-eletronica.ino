@@ -46,10 +46,60 @@ void setup() {
   tone(buzzerPin, 1200);
   delay(150);
   noTone(buzzerPin);
+
+  delay(1000);
 }
 
 void loop() {
-  
+  lcd.clear();
+  lcd.print("Bem vindo.");
+  lcd.setCursor(0, 1);
+  lcd.print("Inicie o voto.");
+
+  while(true) {
+    if(digitalRead(confirmButtonPin) == LOW) {
+      while(digitalRead(confirmButtonPin) == LOW) {
+        delay(50);
+      }
+
+      break;
+    }
+  }
+
+  for(int arrayPos = 0; arrayPos < 4; arrayPos++) {
+    lcd.clear();
+    lcd.print(participants[arrayPos]);
+    lcd.setCursor(0, 1);
+    lcd.print("Mudar / Canc.");
+
+    while(true) {
+      if(digitalRead(confirmButtonPin) == LOW) {
+        while(digitalRead(confirmButtonPin) == LOW) {
+          delay(50);
+        }
+
+        lcd.clear();
+        lcd.print("Votou em:");
+        lcd.setCursor(0, 1);
+        lcd.print(participants[arrayPos]);
+
+        delay(2000);
+        return;
+      } else if(digitalRead(changeButtonPin) == LOW) {
+        while(digitalRead(changeButtonPin) == LOW) {
+          delay(50);
+        }
+
+        // return to "for" loop and changing
+        // participant
+        break;
+      }
+    }
+
+    if(arrayPos == 3) {
+      arrayPos = 0;
+    }
+  }
 }
 
 void addParticipants(String participantsData) {
