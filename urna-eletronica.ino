@@ -11,6 +11,7 @@ String participants[4];
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void addParticipants(String participantsData);
+void soundFinishVoting();
 
 void setup() {
   lcd.init();
@@ -78,6 +79,8 @@ void loop() {
           while(digitalRead(confirmButtonPin) == LOW) {
             delay(50);
           }
+
+          soundFinishVoting();
   
           lcd.clear();
           lcd.print("Votou em:");
@@ -118,4 +121,17 @@ void addParticipants(String participantsData) {
       arrayPos += 1;
     }
   }
+}
+
+void soundFinishVoting() {
+  for(int i = 0; i < 5; i++) {
+    tone(buzzerPin, 2032);
+    delay(90);
+    tone(buzzerPin, 2132);
+    delay(90);
+  }
+
+  tone(buzzerPin, 2032);
+  delay(120);
+  noTone();
 }
