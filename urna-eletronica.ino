@@ -7,6 +7,7 @@ const int cancelButtonPin = 4;
 const int confirmButtonPin = 5;
 
 String participants[4];
+int participantsVotes[4] = {0, 0, 0, 0};
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -92,6 +93,7 @@ void loop() {
               }
 
               soundFinishVoting();
+              participantsVotes[arrayPos] += 1;
   
               lcd.clear();
               lcd.print("Votou em:");
