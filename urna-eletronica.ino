@@ -66,38 +66,36 @@ void loop() {
     }
   }
 
-  for(int arrayPos = 0; arrayPos < 4; arrayPos++) {
-    lcd.clear();
-    lcd.print(participants[arrayPos]);
-    lcd.setCursor(0, 1);
-    lcd.print("Mudar / Canc.");
-
-    while(true) {
-      if(digitalRead(confirmButtonPin) == LOW) {
-        while(digitalRead(confirmButtonPin) == LOW) {
-          delay(50);
+  while(true) {
+    for(int arrayPos = 0; arrayPos < 4; arrayPos++) {
+      lcd.clear();
+      lcd.print(participants[arrayPos]);
+      lcd.setCursor(0, 1);
+      lcd.print("Mudar / Canc.");
+  
+      while(true) {
+        if(digitalRead(confirmButtonPin) == LOW) {
+          while(digitalRead(confirmButtonPin) == LOW) {
+            delay(50);
+          }
+  
+          lcd.clear();
+          lcd.print("Votou em:");
+          lcd.setCursor(0, 1);
+          lcd.print(participants[arrayPos]);
+  
+          delay(2000);
+          return;
+        } else if(digitalRead(changeButtonPin) == LOW) {
+          while(digitalRead(changeButtonPin) == LOW) {
+            delay(50);
+          }
+  
+          // return to "for" loop and changing
+          // participant
+          break;
         }
-
-        lcd.clear();
-        lcd.print("Votou em:");
-        lcd.setCursor(0, 1);
-        lcd.print(participants[arrayPos]);
-
-        delay(2000);
-        return;
-      } else if(digitalRead(changeButtonPin) == LOW) {
-        while(digitalRead(changeButtonPin) == LOW) {
-          delay(50);
-        }
-
-        // return to "for" loop and changing
-        // participant
-        break;
       }
-    }
-
-    if(arrayPos == 3) {
-      arrayPos = 0;
     }
   }
 }
@@ -105,7 +103,7 @@ void loop() {
 void addParticipants(String participantsData) {
   String participantName = "";
   participantsData.replace(" ", "");
-  
+
   int arrayPos = 0;
   
   for(int i = 0; i < participantsData.length(); i++) {
