@@ -133,5 +133,5 @@ void soundFinishVoting() {
 
   tone(buzzerPin, 2032);
   delay(120);
-  noTone();
+  noTone(buzzerPin);
 }
