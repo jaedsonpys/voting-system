@@ -80,15 +80,37 @@ void loop() {
             delay(50);
           }
 
-          soundFinishVoting();
-  
           lcd.clear();
-          lcd.print("Votou em:");
+          lcd.print("Confirmar voto?");
           lcd.setCursor(0, 1);
           lcd.print(participants[arrayPos]);
+
+          while(true) {
+            if(digitalRead(confirmButtonPin) == LOW) {
+              while(digitalRead(confirmButtonPin) == LOW) {
+                delay(50);
+              }
+
+              soundFinishVoting();
   
-          delay(2000);
-          return;
+              lcd.clear();
+              lcd.print("Votou em:");
+              lcd.setCursor(0, 1);
+              lcd.print(participants[arrayPos]);
+
+              delay(2000);
+              return;
+            } else if(digitalRead(cancelButtonPin) == LOW) {
+              while(digitalRead(cancelButtonPin) == LOW) {
+                delay(50);
+              }
+
+              lcd.clear();
+              lcd.print("Cancelado");
+
+              break;
+            }
+          }
         } else if(digitalRead(changeButtonPin) == LOW) {
           while(digitalRead(changeButtonPin) == LOW) {
             delay(50);
