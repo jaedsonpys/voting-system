@@ -13,9 +13,6 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 void addParticipants(String participantsData);
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("wp"); // waiting participants
-  
   lcd.init();
   lcd.backlight();
 
@@ -23,6 +20,9 @@ void setup() {
   pinMode(changeButtonPin, INPUT_PULLUP);
   pinMode(cancelButtonPin, INPUT_PULLUP);
   pinMode(confirmButtonPin, INPUT_PULLUP);
+
+  Serial.begin(9600);
+  Serial.println("wp"); // waiting participants
 
   while(Serial.available() == 0) {delay(100);}
 
