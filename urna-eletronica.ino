@@ -65,6 +65,21 @@ void loop() {
       }
 
       break;
+    } else if(Serial.available()) {
+      delay(250);
+
+      String cmd = Serial.readString();
+      Serial.println(cmd);
+
+      cmd.replace("\n", "");
+
+      if(cmd == "gv") {
+        for(int i = 0; i < 4; i++) {
+          Serial.print(participants[i]);
+          Serial.print('=');
+          Serial.println(participantsVotes[i]);
+        }
+      }
     }
   }
 
