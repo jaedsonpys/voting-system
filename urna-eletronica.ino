@@ -86,9 +86,10 @@ void loop() {
         }
       } else if(cmd == "end") {
         lcd.clear();
+        lcd.setCursor(4, 0);
         lcd.print("Sistema");
-        lcd.setCursor(0, 1);
-        lcd.print("fechado.");
+        lcd.setCursor(4, 1);
+        lcd.print("fechado");
 
         tone(buzzerPin, 1200);
         delay(150);
@@ -134,9 +135,10 @@ void loop() {
               participantsVotes[arrayPos] += 1;
   
               lcd.clear();
-              lcd.print("Votou em:");
-              lcd.setCursor(0, 1);
-              lcd.print(participants[arrayPos]);
+              lcd.setCursor(6, 0);
+              lcd.print("FIM");
+              lcd.setCursor(4, 1);
+              lcd.print("Obrigado");
 
               delay(2000);
               return;
