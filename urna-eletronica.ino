@@ -15,6 +15,8 @@ void addParticipants(String participantsData);
 void soundFinishVoting();
 void soundButtonPress();
 
+void(* resetFunc) (void) = 0; //declare reset function @ address 0
+
 void setup() {
   lcd.init();
   lcd.backlight();
@@ -82,6 +84,22 @@ void loop() {
           Serial.print('=');
           Serial.println(participantsVotes[i]);
         }
+      } else if(cmd == "end") {
+        lcd.clear();
+        lcd.print("Sistema");
+        lcd.setCursor(0, 1);
+        lcd.print("fechado.");
+
+        tone(buzzerPin, 1200);
+        delay(150);
+        tone(buzzerPin, 1000);
+        delay(150);
+        tone(buzzerPin, 800);
+        delay(150);
+        noTone(buzzerPin);
+      
+        delay(1000);
+        resetFunc();
       }
     }
   }
