@@ -13,6 +13,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void addParticipants(String participantsData);
 void soundFinishVoting();
+void soundButtonPress();
 
 void setup() {
   lcd.init();
@@ -64,6 +65,8 @@ void loop() {
         delay(50);
       }
 
+      soundButtonPress();
+
       break;
     } else if(Serial.available()) {
       delay(250);
@@ -96,6 +99,8 @@ void loop() {
             delay(50);
           }
 
+          soundButtonPress();
+
           lcd.clear();
           lcd.print("Confirmar voto?");
           lcd.setCursor(0, 1);
@@ -122,6 +127,8 @@ void loop() {
                 delay(50);
               }
 
+              soundButtonPress();
+
               lcd.clear();
               lcd.print("Cancelado");
 
@@ -135,6 +142,8 @@ void loop() {
           while(digitalRead(changeButtonPin) == LOW) {
             delay(50);
           }
+
+          soundButtonPress();
   
           // return to "for" loop and changing
           // participant
@@ -176,5 +185,11 @@ void soundFinishVoting() {
 
   tone(buzzerPin, 2032);
   delay(120);
+  noTone(buzzerPin);
+}
+
+void soundButtonPress() {
+  tone(buzzerPin, 1000);
+  delay(70);
   noTone(buzzerPin);
 }
