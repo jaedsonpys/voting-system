@@ -72,9 +72,9 @@ void loop() {
       delay(250);
 
       String cmd = Serial.readString();
-      Serial.println(cmd);
 
       cmd.replace("\n", "");
+      Serial.println(cmd);
 
       if(cmd == "gv") {
         for(int i = 0; i < 4; i++) {
