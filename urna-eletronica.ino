@@ -107,11 +107,17 @@ void loop() {
 
   while(true) {
     for(int arrayPos = 0; arrayPos < 4; arrayPos++) {
+      String participantName = participants[arrayPos];
+
+      int nameLength = participantName.length();
+      int nameLCDCursor = (16 - nameLength) / 2;
+      
       lcd.clear();
-      lcd.print(participants[arrayPos]);
+      lcd.setCursor(nameLCDCursor, 0);
+      lcd.print(participantName);
       lcd.setCursor(0, 1);
       lcd.print("Mudar / Confirm.");
-  
+
       while(true) {
         if(digitalRead(confirmButtonPin) == LOW) {
           while(digitalRead(confirmButtonPin) == LOW) {
@@ -121,9 +127,10 @@ void loop() {
           soundButtonPress();
 
           lcd.clear();
-          lcd.print("Confirmar voto?");
-          lcd.setCursor(0, 1);
-          lcd.print(participants[arrayPos]);
+          lcd.setCursor(3, 0);
+          lcd.print("Confirmar?");
+          lcd.setCursor(nameLCDCursor, 1);
+          lcd.print(participantName);
 
           while(true) {
             if(digitalRead(confirmButtonPin) == LOW) {
@@ -150,6 +157,7 @@ void loop() {
               soundButtonPress();
 
               lcd.clear();
+              lcd.setCursor(3, 0);
               lcd.print("Cancelado");
 
               delay(2000);
