@@ -62,9 +62,10 @@ void setup() {
 void loop() {
   lcd.noBlink();
   lcd.clear();
-  lcd.print("Bem vindo.");
-  lcd.setCursor(0, 1);
-  lcd.print("Inicie o voto.");
+  lcd.setCursor(3, 0);
+  lcd.print("Bem vindo");
+  lcd.setCursor(5, 1);
+  lcd.print("Inicie");
 
   while(true) {
     if(digitalRead(confirmButtonPin) == LOW) {
