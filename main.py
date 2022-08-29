@@ -29,5 +29,26 @@ def main():
             print('Participants added')
             print('-=' * 20)
 
+        while True:
+            prompt = input('Request result? [y/n]: ').strip().lower()
+            print('-=' * 20)
+
+            if prompt == 'y':
+                ser.write(b'gv\n')
+
+                cmd = ser.readline().decode()
+                cmd = cmd.replace('\r\n', '')
+
+                if cmd == 'gv':
+                    for i in range(4):
+                        participant = ser.readline().decode()
+                        participant = participant.replace('\r\n', '')
+
+                        name, votes = participant.split('=')
+
+                        print(f'{name}: {votes}')
+
+            print('-=' * 20)
+
 
 main()
