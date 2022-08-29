@@ -14,12 +14,15 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 void addParticipants(String participantsData);
 void soundFinishVoting();
 void soundButtonPress();
+void logoImage();
 
 void(* resetFunc) (void) = 0; //declare reset function @ address 0
 
 void setup() {
   lcd.init();
   lcd.backlight();
+
+  logoImage();
 
   pinMode(buzzerPin, OUTPUT);
   pinMode(changeButtonPin, INPUT_PULLUP);
@@ -29,6 +32,7 @@ void setup() {
   Serial.begin(9600);
   Serial.println("wp"); // waiting participants
 
+  lcd.clear();
   lcd.print("Aguardando");
   lcd.setCursor(0, 1);
   lcd.print("participantes...");
@@ -234,4 +238,91 @@ void soundButtonPress() {
   tone(buzzerPin, 1000);
   delay(70);
   noTone(buzzerPin);
+}
+
+void logoImage() {
+  lcd.clear();
+
+  byte image08[8] = {B00000, B00000, B00000, B11111, B11111, B11111, B00100, B00100};
+  byte image07[8] = {B00000, B00000, B00000, B00111, B11111, B11100, B11100, B11100};
+  byte image09[8] = {B00000, B00000, B00000, B11100, B11111, B00111, B00111, B00111};
+  byte image23[8] = {B11100, B11100, B11100, B11111, B00111, B00000, B00000, B00000};
+  byte image25[8] = {B00111, B00111, B00111, B11111, B11100, B00000, B00000, B00000};
+  byte image24[8] = {B00100, B00100, B11111, B11111, B11111, B00000, B00000, B00000};
+  
+  lcd.createChar(0, image08);
+  lcd.createChar(1, image07);
+  lcd.createChar(2, image09);
+  lcd.createChar(3, image23);
+  lcd.createChar(4, image25);
+  lcd.createChar(5, image24);
+  
+  lcd.setCursor(7, 0);
+  lcd.write(byte(0));
+  lcd.setCursor(6, 0);
+  lcd.write(byte(1));
+  lcd.setCursor(8, 0);
+  lcd.write(byte(2));
+  lcd.setCursor(6, 1);
+  lcd.write(byte(3));
+  lcd.setCursor(8, 1);
+  lcd.write(byte(4));
+  lcd.setCursor(7, 1);
+  lcd.write(byte(5));
+
+  delay(500);
+
+  // 50%
+
+  lcd.clear();
+
+  byte image14[8] = {B00000, B00000, B00000, B00111, B11111, B11100, B11100, B11100};
+  byte image15[8] = {B00000, B00000, B00000, B11100, B11111, B00111, B00111, B00111};
+  byte image16[8] = {B11100, B11100, B11100, B11111, B00111, B00000, B00000, B00000};
+  byte image17[8] = {B00111, B00111, B00111, B11111, B11100, B00000, B00000, B00000};
+  byte image18[8] = {B00100, B00100, B11111, B11111, B11111, B00000, B00000, B00000};
+  
+  lcd.createChar(0, image14);
+  lcd.createChar(1, image15);
+  lcd.createChar(2, image16);
+  lcd.createChar(3, image17);
+  lcd.createChar(4, image18);
+  
+  lcd.setCursor(6, 0);
+  lcd.write(byte(0));
+  lcd.setCursor(8, 0);
+  lcd.write(byte(1));
+  lcd.setCursor(6, 1);
+  lcd.write(byte(2));
+  lcd.setCursor(8, 1);
+  lcd.write(byte(3));
+  lcd.setCursor(7, 1);
+  lcd.write(byte(4));
+
+  delay(500);
+
+  // 100%
+
+  lcd.clear();
+
+  byte image10[8] = {B00000, B00000, B00000, B00111, B11111, B11100, B11100, B11100};
+  byte image11[8] = {B00000, B00000, B00000, B11100, B11111, B00111, B00111, B00111};
+  byte image12[8] = {B11100, B11100, B11100, B11111, B00111, B00000, B00000, B00000};
+  byte image13[8] = {B00111, B00111, B00111, B11111, B11100, B00000, B00000, B00000};
+  
+  lcd.createChar(0, image10);
+  lcd.createChar(1, image11);
+  lcd.createChar(2, image12);
+  lcd.createChar(3, image13);
+  
+  lcd.setCursor(6, 0);
+  lcd.write(byte(0));
+  lcd.setCursor(8, 0);
+  lcd.write(byte(1));
+  lcd.setCursor(6, 1);
+  lcd.write(byte(2));
+  lcd.setCursor(8, 1);
+  lcd.write(byte(3));
+
+  delay(1000);
 }
