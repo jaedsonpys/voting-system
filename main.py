@@ -25,5 +25,9 @@ def main():
         cmd = ser.readline().decode()
         cmd = cmd.replace('\r\n', '')
 
+        if cmd == 'pa':
+            print('Participants added')
+            print('-=' * 20)
+
 
 main()
