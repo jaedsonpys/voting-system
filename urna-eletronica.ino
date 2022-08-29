@@ -134,10 +134,10 @@ void loop() {
           soundButtonPress();
 
           lcd.clear();
-          lcd.setCursor(3, 0);
-          lcd.print("Confirmar?");
-          lcd.setCursor(nameLCDCursor, 1);
+          lcd.setCursor(nameLCDCursor, 0);
           lcd.print(participantName);
+          lcd.setCursor(1, 1);
+          lcd.print("Canc. / Conf.");
 
           while(true) {
             if(digitalRead(confirmButtonPin) == LOW) {
