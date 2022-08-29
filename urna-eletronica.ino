@@ -125,9 +125,12 @@ void loop() {
               lcd.clear();
               lcd.print("Cancelado");
 
+              delay(2000);
               break;
             }
           }
+
+          break;
         } else if(digitalRead(changeButtonPin) == LOW) {
           while(digitalRead(changeButtonPin) == LOW) {
             delay(50);
