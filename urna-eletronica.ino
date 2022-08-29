@@ -22,8 +22,6 @@ void setup() {
   lcd.init();
   lcd.backlight();
 
-  logoImage();
-
   pinMode(buzzerPin, OUTPUT);
   pinMode(changeButtonPin, INPUT_PULLUP);
   pinMode(cancelButtonPin, INPUT_PULLUP);
@@ -32,21 +30,17 @@ void setup() {
   Serial.begin(9600);
   Serial.println("wp"); // waiting participants
 
-  lcd.clear();
-  lcd.print("Aguardando");
-  lcd.setCursor(0, 1);
-  lcd.print("participantes...");
-
-  while(Serial.available() == 0) {delay(100);}
+  while(!Serial.available()) {
+    logoImage();
+    delay(500);
+  }
 
   String participantsData = Serial.readString();
   addParticipants(participantsData);
 
   Serial.println("pa"); // participants added
   lcd.clear();
-  lcd.print("Participantes");
-  lcd.setCursor(0, 1);
-  lcd.print("adicionados.");
+  lcd.blink();
 
   for(int i = 0; i < 4; i++) {
     Serial.print(participants[i]);
@@ -66,6 +60,7 @@ void setup() {
 }
 
 void loop() {
+  lcd.noBlink();
   lcd.clear();
   lcd.print("Bem vindo.");
   lcd.setCursor(0, 1);
