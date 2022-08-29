@@ -117,9 +117,16 @@ void loop() {
       String participantName = participants[arrayPos];
 
       int nameLength = participantName.length();
-      int nameLCDCursor = (16 - nameLength) / 2;
+      int nameLCDCursor = (15 - nameLength) / 2;
       
       lcd.clear();
+
+      byte image01[8] = {B00000, B10000, B11000, B11100, B11110, B11100, B11000, B10000};
+      lcd.createChar(0, image01);
+
+      lcd.setCursor(0, 0);
+      lcd.write(byte(0));
+      
       lcd.setCursor(nameLCDCursor, 0);
       lcd.print(participantName);
       lcd.setCursor(0, 1);
