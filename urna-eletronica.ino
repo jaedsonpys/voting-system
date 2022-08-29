@@ -138,14 +138,14 @@ void loop() {
                 delay(50);
               }
 
-              soundFinishVoting();
-              participantsVotes[arrayPos] += 1;
-  
               lcd.clear();
               lcd.setCursor(6, 0);
               lcd.print("FIM");
               lcd.setCursor(4, 1);
               lcd.print("Obrigado");
+
+              soundFinishVoting();
+              participantsVotes[arrayPos] += 1;
 
               delay(2000);
               return;
