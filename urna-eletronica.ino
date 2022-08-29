@@ -318,6 +318,4 @@ void logoImage() {
   lcd.write(byte(2));
   lcd.setCursor(8, 1);
   lcd.write(byte(3));
-
-  delay(1000);
 }
