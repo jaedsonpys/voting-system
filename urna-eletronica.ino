@@ -91,7 +91,7 @@ void loop() {
       lcd.clear();
       lcd.print(participants[arrayPos]);
       lcd.setCursor(0, 1);
-      lcd.print("Mudar / Conf.");
+      lcd.print("Mudar / Confirm.");
   
       while(true) {
         if(digitalRead(confirmButtonPin) == LOW) {
