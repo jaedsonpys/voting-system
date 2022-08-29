@@ -148,6 +148,7 @@ void loop() {
 void addParticipants(String participantsData) {
   String participantName = "";
   participantsData.replace(" ", "");
+  participantsData.replace("\n", "");
   participantsData.concat(',');
 
   int arrayPos = 0;
