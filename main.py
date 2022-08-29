@@ -29,17 +29,27 @@ def main():
             print('Participants added')
             print('-=' * 20)
 
-        while True:
-            prompt = input('Command [gv (get voting) / end]: ').strip().lower()
+            for i in range(4):
+                participant = ser.readline().decode()
+                participant = participant.replace('\r\n', '')
+
+                name, votes = participant.split('=')
+
+                print(f'{name}: {votes}')
+
             print('-=' * 20)
 
-            if prompt == 'gv':
-                ser.write(b'gv\n')
+        while True:
+            prompt = input('End voting? [y/n]: ').strip().lower()
+            print('-=' * 20)
+
+            if prompt == 'y':
+                ser.write(b'end\n')
 
                 cmd = ser.readline().decode()
                 cmd = cmd.replace('\r\n', '')
 
-                if cmd == 'gv':
+                if cmd == 'end':
                     for i in range(4):
                         participant = ser.readline().decode()
                         participant = participant.replace('\r\n', '')
@@ -47,12 +57,11 @@ def main():
                         name, votes = participant.split('=')
 
                         print(f'{name}: {votes}')
-            elif prompt == 'end':
-                ser.write(b'end\n')
 
-                print('Closed system.')
-                ser.close()
-                return 0
+                    print('-=' * 20)
+                    print('Closed system.')
+                    ser.close()
+                    return 0
 
             print('-=' * 20)
 

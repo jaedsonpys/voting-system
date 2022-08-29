@@ -44,6 +44,12 @@ void setup() {
   lcd.setCursor(0, 1);
   lcd.print("adicionados.");
 
+  for(int i = 0; i < 4; i++) {
+    Serial.print(participants[i]);
+    Serial.print('=');
+    Serial.println(participantsVotes[i]);
+  }
+
   tone(buzzerPin, 800);
   delay(150);
   tone(buzzerPin, 1000);
@@ -78,13 +84,14 @@ void loop() {
       cmd.replace("\n", "");
       Serial.println(cmd);
 
-      if(cmd == "gv") {
+      if(cmd == "end") {
+        // send votation result
         for(int i = 0; i < 4; i++) {
           Serial.print(participants[i]);
           Serial.print('=');
           Serial.println(participantsVotes[i]);
         }
-      } else if(cmd == "end") {
+        
         lcd.clear();
         lcd.setCursor(4, 0);
         lcd.print("Sistema");
