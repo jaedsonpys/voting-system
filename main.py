@@ -30,10 +30,10 @@ def main():
             print('-=' * 20)
 
         while True:
-            prompt = input('Request result? [y/n]: ').strip().lower()
+            prompt = input('Command [gv (get voting) / end]: ').strip().lower()
             print('-=' * 20)
 
-            if prompt == 'y':
+            if prompt == 'gv':
                 ser.write(b'gv\n')
 
                 cmd = ser.readline().decode()
@@ -47,6 +47,12 @@ def main():
                         name, votes = participant.split('=')
 
                         print(f'{name}: {votes}')
+            elif prompt == 'end':
+                ser.write(b'end\n')
+
+                print('Closed system.')
+                ser.close()
+                return 0
 
             print('-=' * 20)
 
